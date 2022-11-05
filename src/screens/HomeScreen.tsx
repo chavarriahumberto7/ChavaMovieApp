@@ -9,6 +9,7 @@ import Carousel from 'react-native-snap-carousel';
 import { useMovie } from '../hooks/useMovie';
 import MoviePoster from '../components/MoviePoster';
 import HorizontalSlider from '../components/HorizontalSlider';
+import GradientBackground from '../components/GradientBackground';
 
 
 
@@ -36,65 +37,68 @@ return(
 )
 }
  else return (
+  <GradientBackground>
   
-  <ScrollView>
-    
+      <ScrollView>
+      
 
- 
-    <View style={{marginTop:top+5}} className=' h-[340]'>
+  
+      <View style={{marginTop:top+5}} className=' h-[340]'>
+      
+          
+
+        {/* Carousel Principal */}
+        {nowPlaying&&<Carousel
+        data={nowPlaying}
+        renderItem={({item})=> {return(
+          <MoviePoster movie={item}/>
+        )}}
+        sliderWidth={windowWidth}
+        sliderHeight={windowWidth}
+        itemWidth={270}
+        inactiveSlideOpacity={0.6}
+        layout={'default'} 
+              
+        />}
     
+      </View>
+
+      {/* Movies top rated */}
+      {topRatedMovies&& <HorizontalSlider
+            movies={topRatedMovies}
+            title='Las mejores valoradas'
+            
+            />}
+
+      {/* Popular Movies */}
+      {popularMovies&& <HorizontalSlider
+      movies={popularMovies}
+      title='Peliculas mas populares'
+      />}
+      
+
+        {/* Movies section in cinemas */}
+        {upcomingMovies&& <HorizontalSlider
+        movies={upcomingMovies}
+        title='Proximamente'
+        />}
+
         
 
-      {/* Carousel Principal */}
-      {nowPlaying&&<Carousel
-      data={nowPlaying}
-      renderItem={({item})=> {return(
-        <MoviePoster movie={item}/>
-      )}}
-      sliderWidth={windowWidth}
-      sliderHeight={windowWidth}
-      itemWidth={270}
-      inactiveSlideOpacity={0.6}
-      layout={'default'} 
-            
-      />}
-   
-    </View>
 
-    {/* Movies top rated */}
-    {topRatedMovies&& <HorizontalSlider
-          movies={topRatedMovies}
-          title='Las mejores valoradas'
-          
-          />}
 
-    {/* Popular Movies */}
-    {popularMovies&& <HorizontalSlider
-    movies={popularMovies}
-    title='Peliculas mas populares'
-    />}
+
+
     
 
-      {/* Movies section in cinemas */}
-      {upcomingMovies&& <HorizontalSlider
-      movies={upcomingMovies}
-      title='Proximamente'
-      />}
+      
 
       
 
 
+      </ScrollView>
 
-
-
-   
-
-    
-
-    
-
-
-    </ScrollView>
+  </GradientBackground>
     
   )
 }
